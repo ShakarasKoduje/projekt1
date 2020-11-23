@@ -1,4 +1,5 @@
 #include "struktura.h"
+#include "lokalizacje.h"
 #include "funkcje.h"
 #include <stdio.h>
 
@@ -12,6 +13,12 @@ void PetlaGry(postac_t *boh){
     for(int i =0; i<5; i++){
         (*orki[i].okrzyk)(orki[i]);
     }
+    UtworzLokalizacje();
+    
+    printf("%s, %s, w ktorym znajduje sie: %s, sasiaduje z: %s\n", wsk_korytarz->nazwa,wsk_korytarz->opis, wsk_korytarz->przedmioty[0].nazwa, wsk_korytarz->zachod->nazwa);
+    printf("%s, %s, sasiaduje z: %s\n", wsk_salon->nazwa,wsk_salon->opis, wsk_salon->wschod->nazwa);
+
+
     //postac zostala zadeklarowana w pliku funkcje.c i jak najbardziej ja tu widac.
     postac.nazwa = "Polpotron";
     printf("Imie postaci z innego pliku to: %s\n", postac.nazwa);
@@ -38,6 +45,7 @@ void PetlaGry(postac_t *boh){
     if(bohater.bron){
         printf("Ma bron\n");
     }
+    UwolnijPamiecLokalizacji();
     FreeOrki();
 }
 

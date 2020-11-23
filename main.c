@@ -9,5 +9,7 @@ int main(){
     PetlaGry(&p); //petla gry zgarnia adres utworzonej postaci
 
     free(name); //uwalniamy pamiec
+
+    
     return 0;
 }
