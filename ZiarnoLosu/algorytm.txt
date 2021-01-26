@@ -1,0 +1,56 @@
+main(); <- Gra(); <-{TworzeniePostaci(); PetlaGry(); InicjalizacjaGry();}
+
+TworzeniePostaci(); <= struktura postac_t 
+
+PetlaGry(); <=Scena();
+
+InicjalizacjaGry(); <= {InicjalizacjaPrzeciwnikow(); InicjalizacjaLokalizacji(); InicjalizacjaPrzedmiotow();}
+
+Gra(){
+    InicjalizacjaGry(){
+        InicjalizacjaPrzedmiotow();
+        InicjalizacjaPrzeciwnikow();
+        InicjalizacjaLokalizacji();        
+    }
+    TworzeniePostaci();
+
+    PetlaGry(){
+        aktualna lokalizacja = startowa lokalizacja
+        while(){
+            Scena(){
+                wczytanie opisu aktualnej lokalizacji, 
+                wczytanie listy przedmiotow w aktualnej lokalizacji,
+                przedstwienie mozliwosci akcji
+                wybor akcji
+                akcja
+            }
+        }
+    }
+}
+========================4
+struktury:
+    postac_t, 
+    przeciwnik_t
+    lokalizacja_t, 
+    przedmiot_t
+
+funkcje struktur:
+    funkcje wskaznikowe przypisane do postac_t
+    funkcje wskaznikowe przypisane do przeciwnik_t
+    funkcje dzialajace na struktury
+
+
+Algorytm walka:
+
+    wrog;
+    gracz;
+    while(gracz == TRUP || wrog || TRUP){
+        runda(gracz, wrog);
+    }
+
+    runda:
+        tura gracza
+        tura wroga
+    
+    tura gracza/wroga:
+        akcja ataku, wynik ataku, jezeli przeciwnik zabity, koniec walki
