@@ -3,7 +3,9 @@
 #include <time.h>
 
 #include "../STRUKTURY/struktura.h"
+#include "../STRUKTURY/funkcjestruktur.h"
 #include "../STEROWANIEPROGRAMEM/sterowanie.h"
+#include "../STEROWANIEPROGRAMEM/odczytpliku.h"
 
 #define MAXODCZYT 1024
 #define KOMNATY 12
@@ -36,14 +38,25 @@ void UtworzLokalizacje(lokalizacja_t * const * lokalizacje){
     "Mesa", "Sypialnia C","Kuchnia", 
     "Magazyn", "Biuro", 
     "Mechanizm Sygnałowy", "Platforma Obserwacyjna"};
+    char komnatyplik[12][64] = {
+    "Skladzik", "IzbaDzienna", "Hol", "SypialniaA", "SypialniaB", 
+    "Mesa", "SypialniaC","Kuchnia", 
+    "Magazyn", "Biuro", 
+    "MechanizmSygnalowy", "PlatformaObserwacyjna"};
+
 
     for(int i = 0 ; i < KOMNATY; i++){
         lokalizacje[i]->nazwa = (char*)malloc(sizeof(char)*64);
+        lokalizacje[i]->plik = (char*)malloc(sizeof(char)*64);
     }
     int ilu=0;
+    /*
+        PRZYPISANIE SĄSIADÓW I NAZW DO LOKALIZACJI
+    */
     for(int i = 0 ; i < KOMNATY; i++){
         //printf("%s ", komnaty + i);
         strcpy(lokalizacje[i]->nazwa, komnaty +i);
+        strcpy(lokalizacje[i]->plik, komnatyplik +i);
         switch(i){
             case 5:
                 ilu =4; 
@@ -147,6 +160,18 @@ void UtworzLokalizacje(lokalizacja_t * const * lokalizacje){
     //platforma obserwacyjna
     lokalizacje[11]->sasiedzi[0] = lokalizacje[10]; //mechanizm sygnałowy
 
+
+    /*
+        DODAWANIE OPISÓW DO LOKALIZACJI
+    */
+
+
+    for(int i = 0 ; i < KOMNATY; i++){
+        lokalizacje[i]->opis = (char*)malloc(sizeof(char)*MAXODCZYT);
+        odczytkomnata(&lokalizacje[i]);   
+        
+    }
+
 }
 
 void StworzPostac(postac_t **p){
@@ -155,7 +180,10 @@ void StworzPostac(postac_t **p){
     char imie[250];
     *p = (postac_t*)malloc(sizeof(postac_t));
     (*p)->nazwa = (char*)malloc(sizeof(char)*250);
-
+    (*p)->bron = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+    
+    (*p)->atakuj = &atak;
+    (*p)->okrzyk = &okrzykbojowy;
     FILE *plik; int linia = 1;
     plik = fopen("PLIKITEKSTOWE/tworzeniepostaci.txt", "r");
     char odczyt[MAXODCZYT];
@@ -183,6 +211,14 @@ void StworzPostac(postac_t **p){
     (*p)->percepcja = 30;
     (*p)->silawoli = 30;
     (*p)->zywotnosc = 30;
+    (*p)->czyZyje = true;
+    (*p)->plecak = (przedmiot_t**)malloc(sizeof(przedmiot_t*)*(*p)->walka);
+    /* Zrobić osobną funkcję do zarządzania plecakiem. Dodawanie/Usuwanie przedmiotów
+    for(int i = 0; i < (*p)->walka; i++){
+        (*p)->plecak[i] = (przedmiot_t*)malloc(sizeof(przedmiot_t));        
+    }
+    */
+
 
     fclose(plik);
 }
@@ -199,13 +235,23 @@ void StworzPotwory(postac_t ***potwory){
 void ZapelnijPotwory(postac_t * const * potwory){
     for(int i = 0; i < POTWORY; i++){
         potwory[i]->nazwa = (char*)malloc(sizeof(char)*128);
+        potwory[i]->opis = (char*)malloc(sizeof(char)*MAXODCZYT);
+        potwory[i]->atakuj = &atak;
+        potwory[i]->okrzyk = &okrzykbojowy;
     }
 
     strcpy(potwory[0]->nazwa, "Ungor");
+    potwory[0]->walka = 20; potwory[0]->zywotnosc = 10;
     strcpy(potwory[1]->nazwa, "Gor");
+    potwory[1]->walka = 30; potwory[1]->zywotnosc = 20;
+
     strcpy(potwory[2]->nazwa, "Bestigor");
+    potwory[2]->walka = 40; potwory[2]->zywotnosc = 30;
+
     for(int i = 0; i < POTWORY; i++){
-        printf("POTWÓR: %s \n", potwory[i]->nazwa);
+        
+        odczytpostac(&potwory[i]);
+        printf("\nPOTWÓR: %s \n", potwory[i]->nazwa);
     }
 
 }

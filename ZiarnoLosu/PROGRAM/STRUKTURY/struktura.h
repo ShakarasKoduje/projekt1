@@ -10,11 +10,16 @@ typedef struct opis_t opis_t;
 
 struct postac_t{
     przedmiot_t *bron;
-    char *nazwa;
-    int (* dodaj)(int, int, postac_t);
+    przedmiot_t **plecak;
+    char *nazwa, *opis;
+
+    void (* atakuj)(postac_t***, postac_t***);
     void (* wezpzedmiot)(postac_t*, przedmiot_t*);
-    void (* okrzyk)(postac_t);
-    unsigned int walka, zwinnosc, percepcja, silawoli, zywotnosc;   
+    void (* uzyjprzedmiot)(postac_t*, przedmiot_t*);
+    void (* okrzyk)(postac_t const ***);
+    unsigned int walka, zwinnosc, percepcja, silawoli;   
+    int zywotnosc;
+    bool czyZyje;
 
 };
 struct przedmiot_t{
@@ -26,7 +31,7 @@ struct przedmiot_t{
 };
 
 struct lokalizacja_t{
-    char *nazwa;
+    char *nazwa, *plik;
     char *opis;
     unsigned int ilekomnat;
     unsigned int zamek;

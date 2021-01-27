@@ -1,5 +1,5 @@
-Izba Dzienna 1
-Izba Dzienna 2
+Mechanizm 1
+Mechanizm 2
     =========================================================================
     Znajdujesz się w westybulu pełniącym także funkcję zagraconego składziku. 
     Z tego miejsca można przejść do

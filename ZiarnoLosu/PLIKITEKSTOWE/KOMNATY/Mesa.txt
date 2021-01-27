@@ -1,2 +1,9 @@
 Mesa 1
 Mesa 2
+    =========================================================================
+    Mesa jeszcze wczoraj musiała tętnić życiem,
+    teraz jest tu ciemno, i zawodzi wiatr wdzierający się przez wąskie okna
+    strzelnicze.
+    Chodząc depczesz po rozrzuconych kartach do gry, na stole leży niedojedzony
+    posiłek.
+    ==========================================================================
