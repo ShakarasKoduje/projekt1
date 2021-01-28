@@ -40,8 +40,8 @@ void InicjalizacjaGry(lokalizacja_t ***lokalizacje, lokalizacja_t **startowa, po
 
 void UtworzLokalizacje(lokalizacja_t * const * lokalizacje){
     char komnaty[12][64] = {
-    "Składzik", "Izba Dzienna", "Hol", "Sypialnia A", "Sypialnia B", 
-    "Mesa", "Sypialnia C","Kuchnia", 
+    "Składzik", "Izba Dzienna", "Hol", "Sypialnia Molli", "Sypialnia Rhodniego i Franza", 
+    "Mesa", "Sypialnia Głównego Oficera Sygnałowego","Kuchnia", 
     "Magazyn", "Biuro", 
     "Mechanizm Sygnałowy", "Platforma Obserwacyjna"};
     char komnatyplik[12][64] = {
@@ -56,6 +56,8 @@ void UtworzLokalizacje(lokalizacja_t * const * lokalizacje){
         lokalizacje[i]->plik = (char*)malloc(sizeof(char)*64);
         lokalizacje[i]->przedmioty =(przedmiot_t**)malloc(sizeof(przedmiot_t*));
         lokalizacje[i]->ileskarbow = 0;
+        lokalizacje[i]->zamek = 0;
+        if(i == 10)lokalizacje[i]->zamek = 113; //Trybiki
     }
     int ilu=0;
     /*
@@ -137,7 +139,7 @@ void UtworzLokalizacje(lokalizacja_t * const * lokalizacje){
    lokalizacje[5]->sasiedzi[2] = lokalizacje[7]; //kuchnia
    lokalizacje[5]->sasiedzi[3] = lokalizacje[8]; // magazyn 2 piętro
 
-   lokalizacje[5]->przedmioty = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+   //lokalizacje[5]->przedmioty = (przedmiot_t*)malloc(sizeof(przedmiot_t));
 
 
     //sypialnia C

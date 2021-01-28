@@ -1,13 +1,7 @@
-Obserwatorium 1
-Obserwatorium 2
     =========================================================================
-    Znajdujesz się w westybulu pełniącym także funkcję zagraconego składziku. 
-    Z tego miejsca można przejść do
-    HOLU który prowadzi do sypialni asystentów. Kolejne drzwi
-    prowadzą do IZBY DZIENNEJ. Na środoku znajduje się klatka
-    z wijącymi się w górę schodami, prowadzącymi na Pierwsze Piętro
-    do MESY.
-    Słychać ryki z zewnątrz, jakieś drapanie w drzwi wejściowe.
-    Martwy Główny Oficer Sygnałowy - Votta Pluncker leży w kałuży krwii 
-    blisko wejścia do wieży.
+    W powietrzu niesie się ryk wściekłych zwierzoludzi. Kłębią się pod wieżą
+    skryci w ciemnościach nocy. Może nawet wspinają się nawet po murze?
+    Kiedyś możnabyło dzięki teleskopom obserwować sygnały z innych wież,
+    ale obecnie ktoś je zniszczył.
+    Można stąd wrócić do MECHANIZMU SYGNAŁOWEGO.
     ==========================================================================

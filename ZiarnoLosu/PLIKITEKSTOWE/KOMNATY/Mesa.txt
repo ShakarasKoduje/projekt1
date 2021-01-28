@@ -6,4 +6,6 @@ Mesa 2
     strzelnicze.
     Chodząc depczesz po rozrzuconych kartach do gry, na stole leży niedojedzony
     posiłek.
+    Można stąd przejść do SYPIALNI Głównego Oficera Sygnałowego, KUCHNI, 
+    zejść na dół do SKŁADZIKU lub wejść po schodach na górę do MAGAZYNU.
     ==========================================================================

@@ -72,7 +72,18 @@ void Podnies(postac_t **p, lokalizacja_t ***l){
 
 
 }
-void Uzyj(){
+void Uzyj(postac_t **p, lokalizacja_t ***l){
+
+    if(strcmp((**l)->nazwa, "Mechanizm Sygnałowy") == 0){
+
+        puts("Jesteś w Mechanizmie sygnałowym");
+
+    }
+    if(strcmp((**l)->nazwa, "Biuro") == 0){
+
+        puts("Jesteś w Biurze");
+
+    }
     puts("UŻYJ");
 
 
@@ -83,7 +94,7 @@ void Ekwipunek(postac_t const ** p){
     puts("EKWIPUNEK w plecaku: ");
     for(int i = 0 ; i < (*p)->udzwig; i++){
         //puts("JAKIŚ PRZEDMIOT");
-        printf("\t %s \n", (*p)->plecak[i]->nazwa);
+        printf("\t %s KLUCZ: %d\n", (*p)->plecak[i]->nazwa, (*p)->plecak[i]->cecha);
     }
     PrzejdzDalejCzyscEkran();
 

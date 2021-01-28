@@ -70,7 +70,7 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                     tura++; zagrozenie++;
                                     break;  
                                 case '4':
-                                    Uzyj();
+                                    Uzyj(&p,&al);
                                     warunek = true;
                                     tura++; zagrozenie++;
                                     break;  

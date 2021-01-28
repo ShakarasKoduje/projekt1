@@ -1,13 +1,7 @@
 Sypialnia C 1
 Sypialnia C 2
     =========================================================================
-    Znajdujesz się w westybulu pełniącym także funkcję zagraconego składziku. 
-    Z tego miejsca można przejść do
-    HOLU który prowadzi do sypialni asystentów. Kolejne drzwi
-    prowadzą do IZBY DZIENNEJ. Na środoku znajduje się klatka
-    z wijącymi się w górę schodami, prowadzącymi na Pierwsze Piętro
-    do MESY.
-    Słychać ryki z zewnątrz, jakieś drapanie w drzwi wejściowe.
-    Martwy Główny Oficer Sygnałowy - Votta Pluncker leży w kałuży krwii 
-    blisko wejścia do wieży.
+    Sypialnia ta należała do Votty Plunckera, którego ciało stygnie na samym
+    dole wieży w składziku.
+    Można stąd przejść do KUCHNI bądź MESY.
     ==========================================================================
