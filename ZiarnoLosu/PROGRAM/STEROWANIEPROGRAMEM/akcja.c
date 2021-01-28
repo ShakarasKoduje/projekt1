@@ -23,8 +23,21 @@ void Przeszukaj(){
     puts("PRZESZUKAJ");
 
 }
-void Podnies(){
-    puts("PODNIEŚ");
+void Podnies(postac_t **p, lokalizacja_t ***l){
+    puts("PODNIEŚ TEST");
+
+    if((**l)->ileskarbow == 0){
+        puts("SKARBIEC PUSTY.");
+    }
+    else{
+        printf("ILE SKARBÓW? : [%d] %s", (**l)->ileskarbow, (**l)->przedmioty[0]->nazwa );
+
+        //for(())
+        (**p).wezpzedmiot(&(**p).udzwig, &(*p)->plecak, &(**l)->przedmioty);
+        puts("PODNIEŚ");
+    }
+    
+
 }
 void Uzyj(){
     puts("UŻYJ");
@@ -39,8 +52,8 @@ void Ekwipunek(postac_t const ** p){
 void Postac(postac_t const ** p){
     puts("POSTAC");
     printf("%s\n", (*p)->nazwa);
-    printf("Charakterystyka postaci: \n\twalka %d; \n\tzwinność %d; \n\tpercepcja %d; \n\tsiła woli %d; \n\tżywotność %d\n",
-    (*p)->walka, (*p)->zwinnosc, (*p)->percepcja, (*p)->silawoli, (*p)->zywotnosc);
+    printf("Charakterystyka postaci: \n\twalka %d; \n\tzwinność %d; \n\tpercepcja %d; \n\tżywotność %d\n",
+    (*p)->walka, (*p)->zwinnosc, (*p)->percepcja,  (*p)->zywotnosc);
     PrzejdzDalejCzyscEkran();
 
 }

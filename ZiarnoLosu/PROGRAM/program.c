@@ -13,9 +13,25 @@ programu, tj. petlagry()
 #include "petlagry.h"
 #include "INICJALIZACJAPROGRAMU/intro.h"
 #include "INICJALIZACJAPROGRAMU/inicjalizacjagry.h"
-#include "wskaznik.c"
+//#include "wskaznik.c"
 #include "STRUKTURY/struktura.h"
 #include "STEROWANIEPROGRAMEM/sterowanie.h"
+
+
+postac_t *bohater = NULL; //Protagonista, którego losami kieruje gracz.
+
+lokalizacja_t **lokalizacje  =NULL;
+postac_t **potworyTemplatka = NULL;
+
+przedmiot_t **bron = NULL;
+przedmiot_t **pancerze = NULL;
+przedmiot_t **tarcze = NULL;
+przedmiot_t **narzedzia = NULL;
+przedmiot_t **jedzenie = NULL;
+
+
+
+lokalizacja_t *aktualnaLokalizacja = NULL;
 
 void MenuGlowne();
 
@@ -23,8 +39,15 @@ void program(){
     setlocale(LC_COLLATE, "pl_PL");
     time_t czas;
     srand((unsigned) time(&czas)); //ziarno losu zostalo zasiane ;)
+    UtworzPrzedmioty(&bron, &tarcze, &pancerze, &narzedzia, &jedzenie);
+
+
     InicjalizacjaGry(&lokalizacje,&aktualnaLokalizacja, &potworyTemplatka);
     aktualnaLokalizacja = lokalizacje[0];
+
+    PrzypiszPrzedmiotyDoLokalizacji(&lokalizacje, &bron, &tarcze, &pancerze, &narzedzia, &jedzenie);
+    
+    
     WyswietlWprowadzenie();
     MenuGlowne();
     puts("Koniec Programu.");
@@ -50,8 +73,14 @@ void MenuGlowne(){
             {
             case 49:
                 StworzPostac(&bohater);
-                printf("Ropoczynasz Grę %s .\n", bohater->nazwa);
-                PetlaGry(&bohater, &lokalizacje, &aktualnaLokalizacja,&potworyTemplatka);
+                bohater->bron = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+                bohater->tarcza = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+                bohater->pancerz = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+                bohater->bron = bron[0]; bohater->tarcza = tarcze[0]; bohater->pancerz = pancerze[2];
+
+                printf("Ropoczynasz Grę %s z bronią %s.\n", bohater->nazwa , bohater->bron->nazwa);
+                
+                PetlaGry(&bohater, &lokalizacje, &aktualnaLokalizacja, &potworyTemplatka, &bron, &tarcze, &pancerze);
                 system("clear");
                 break;
 

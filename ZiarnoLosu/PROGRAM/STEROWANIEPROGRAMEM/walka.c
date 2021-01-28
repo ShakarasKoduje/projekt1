@@ -11,68 +11,57 @@ postac_t przyklad;
 postac_t *wsk_przykl;
 postac_t **wsk_przykl2;
 
-void Walka(postac_t **p, postac_t **potw){
-    /*
-    int w[3]= {20,25,30};
-    int z[3] = {10, 15, 20};
-    */
+void Walka(postac_t **p, postac_t **potw, przedmiot_t ***bron, przedmiot_t ***tarcze, przedmiot_t ***pancerze){
+
+    for(int i = 0 ; i < 4; i++){
+        printf("Pancerz: %s %s\n", (*pancerze)[i]->nazwa,  (*pancerze)[i]->opis);
+    }
+
+
     przyklad = **potw;
     wsk_przykl = &przyklad;
     wsk_przykl2 = &wsk_przykl;
 
-
-
     (**wsk_przykl2).walka += k10();
     (**wsk_przykl2).zywotnosc += k10();
     (**wsk_przykl2).czyZyje = true;
+    int los;
+    los = rand()%5;
+    (**wsk_przykl2).bron = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+    (**wsk_przykl2).bron = (*bron)[los];
+    los = rand()%3;
+    (**wsk_przykl2).tarcza = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+    (**wsk_przykl2).tarcza = (*tarcze)[los];
+    los = rand()%4;
+    (**wsk_przykl2).pancerz = (przedmiot_t*)malloc(sizeof(przedmiot_t));
+    (**wsk_przykl2).pancerz = (*pancerze)[los];
 
 
-    printf("\n----------------PRZYKŁAD: %s [%d]\n", przyklad.nazwa, przyklad.walka);
-    printf("\n-------WSKAZNIK PRZYKŁAD: %s [%d]\n", (*wsk_przykl2)->nazwa, (*wsk_przykl2)->walka);
-/*
-    if (strcmp((*potw)->nazwa, "Ungor") == 0){
-        printf("Sprawdzamy czy ungor: %s",(*potw)->nazwa );
-        (*potw)->walka = w[0] + k10();
-        (*potw)->zywotnosc = z[0] + k10();
-    }
-    else if (strcmp((*potw)->nazwa, "Gor") == 0)
-    {
-        
-        (*potw)->walka = w[1] + k10();
-        (*potw)->zywotnosc = z[1] + k10();
-    }
-    else if (strcmp((*potw)->nazwa, "Bestigor") == 0)
-    {
-        (*potw)->walka = w[2] + k10();
-        (*potw)->zywotnosc = z[2] + k10();
-    }
-    
-*/
+
+
     (*potw)->czyZyje = true;
-    printf("%s walka %d zywotnosc %d\n", (*potw)->nazwa, (*potw)->walka, (*potw)->zywotnosc);
+
     
-    puts("WALKA WALKA WALKA WALKA WALKA");
+    puts("================= ROZPOCZĘŁA SIĘ WALKA! ======================");
     while((*wsk_przykl2)->czyZyje && (*p)->czyZyje){
-        printf("\n\t zywotnosc: %d", (*wsk_przykl2)->zywotnosc);
+        //printf("\n\t zywotnosc: %d", (*wsk_przykl2)->zywotnosc);
         if((*p)->czyZyje) (*p)->atakuj(&p, &wsk_przykl2); //wywołanie funkcji przypisanej do struktury
-        PrzejdzDalej();
+
 
         if((*wsk_przykl2)->czyZyje) (*wsk_przykl2)->atakuj(&wsk_przykl2, &p);
+        //PrzejdzDalej();
+    }
+
+    if((*p)->czyZyje && !(*wsk_przykl2)->czyZyje){
+        puts("Postać zwyciężyła starcie. Otrzyma punkt zwycięstwa.");
+        (*p)->punktyzwyciestwa = (*p)->punktyzwyciestwa + (*wsk_przykl2)->punktyzwyciestwa;
+        puts("Zwycięstwo w starciu poprawiło twoje zdolności bojowe");
+        (*p)->walka = (*p)->walka + (*wsk_przykl2)->punktyzwyciestwa;
+        printf("Aktualne punkty zwycięstwa postaci wynoszą %d\n", (*p)->punktyzwyciestwa);
         PrzejdzDalej();
     }
 
-/*
-    while((*potw)->czyZyje && (*p)->czyZyje){
-        printf("\n\t zywotnosc: %d", (*potw)->zywotnosc);
-        if((*p)->czyZyje) (*p)->atakuj(&p, &potw); //wywołanie funkcji przypisanej do struktury
-        PrzejdzDalej();
 
-        if((*potw)->czyZyje) (*potw)->atakuj(&potw, &p);
-        PrzejdzDalej();
-    }
-*/
-    puts("\n========================");
+    puts("\n======================== KONIEC STARCIA =================");
 
-    
-    puts("WALKA WALKA WALKA WALKA WALKA");
 }

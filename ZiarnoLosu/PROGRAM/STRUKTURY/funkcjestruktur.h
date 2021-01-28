@@ -6,6 +6,10 @@
 
 void atak(postac_t ***, postac_t ***);
 void okrzykbojowy(postac_t const ***);
+void PodniesPrzedmiot(int *, przedmiot_t ***, przedmiot_t **);
+void UzyjPrzedmiotNaSobie(postac_t ***p);
+void UzyjPrzedmiotLokalizacja(postac_t ***p, lokalizacja_t **l);
+
 /*
 int pododawaj(int,int, postac_t); //prototyp funkcji
 void podniespzedmiot(postac_t*, przedmiot_t*);

@@ -9,15 +9,16 @@ typedef struct skarb_t skarb_t;
 typedef struct opis_t opis_t;
 
 struct postac_t{
-    przedmiot_t *bron;
+    przedmiot_t *bron, *tarcza, *pancerz;
     przedmiot_t **plecak;
     char *nazwa, *opis;
 
     void (* atakuj)(postac_t***, postac_t***);
-    void (* wezpzedmiot)(postac_t*, przedmiot_t*);
-    void (* uzyjprzedmiot)(postac_t*, przedmiot_t*);
+    void (* wezpzedmiot)(int *, przedmiot_t***, przedmiot_t**);
+    void (* uzyjprzedmiotlokalizacja)(postac_t***, przedmiot_t*);
+    void (* uzyjprzedmiotnasobie) (postac_t ***);
     void (* okrzyk)(postac_t const ***);
-    unsigned int walka, zwinnosc, percepcja, silawoli;   
+    unsigned int walka, zwinnosc, percepcja, punktyzwyciestwa, udzwig;   
     int zywotnosc;
     bool czyZyje;
 
@@ -27,7 +28,8 @@ struct przedmiot_t{
     char *opis;
     const char *rodzajstr;
     int cecha; // to moze byc wartosc pancerze, obrazenia broni, ilosc zywotnosci zwracanej prze zywnosc, czy klucz dostepu narzedzia
-    enum rodzaj {BRON, PANCERZ, NARZEDZIE, JEDZENIE} rodzaj;
+    int premia; // do cechy podczas uzywania np. miecz +5 do walki podczas ataku
+    enum rodzaj {BRON, TARCZA, PANCERZ, NARZEDZIE, JEDZENIE} rodzaj;
 };
 
 struct lokalizacja_t{
@@ -38,20 +40,9 @@ struct lokalizacja_t{
     unsigned int ilusasiadow;
 
     const lokalizacja_t **sasiedzi; //tablica z sasiednimi lokalizacjami
-    przedmiot_t *przedmioty;
+    przedmiot_t **przedmioty;
     unsigned int ileskarbow;
-    skarb_t *skarbiec;
-};
 
-struct skarb_t{
-    bool czyjest;
-    przedmiot_t skarb;
-    char *opis; //to jest opis ktory ma byc dolaczony do opisu lokalizacji;
-
-};
-
-struct opis_t{
-    char **opisy;
 };
 
 

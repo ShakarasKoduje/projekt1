@@ -14,22 +14,23 @@ int ryzyko;
 int tura;
 int zagrozenie, jakiprzeciwnik;
 
-void ProwadzGre(postac_t *, lokalizacja_t **, lokalizacja_t const **, postac_t**);
+void ProwadzGre(postac_t *, lokalizacja_t **, lokalizacja_t const **, postac_t**, przedmiot_t ***, przedmiot_t ***, przedmiot_t ***);
 
 
-void PetlaGry(postac_t **p,lokalizacja_t ***l, lokalizacja_t **startowalokalizacja, postac_t ***potwory){
+void PetlaGry(postac_t **p,lokalizacja_t ***l, lokalizacja_t **startowalokalizacja, postac_t ***potwory, przedmiot_t ***bron, przedmiot_t ***tarcze, przedmiot_t *** pancerz){
 
-    tura = 1; zagrozenie = 65;
+    tura = 1; zagrozenie = 5;
     char ch;
-    //(*p)->zywotnosc -= 7;
-    ProwadzGre(*p, startowalokalizacja, *l, *potwory);
+
+       
+    ProwadzGre(*p, startowalokalizacja, *l, *potwory, bron, tarcze, pancerz);
     PrzejdzDalejCzyscEkran();
 }
 
-void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac_t **potwory){
+void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac_t **potwory, przedmiot_t ***bron, przedmiot_t ***tarcze, przedmiot_t *** pancerz){
     koniec = false;
     warunek =false;
-    
+
     do{
             
             
@@ -42,29 +43,6 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                 }
                 else{
                     if(p->czyZyje){
-                        ryzyko = k100();
-                        if(ryzyko < zagrozenie) wrog = true;
-                        else wrog = false;
-                        if(wrog && wybor != '6'){
-                            printf("%d WALKA; zagrozenie=%d \n", wrog, zagrozenie);
-                            jakiprzeciwnik = k100();
-                            
-                            if(jakiprzeciwnik < 51){
-                                printf("Wynik testu na przeciwnika: %d\n", jakiprzeciwnik);
-                                Walka(&p,&potwory[0]);
-                            }
-                            else if (jakiprzeciwnik >50 && jakiprzeciwnik < 95)
-                            {
-                                printf("%s Wynik testu na przeciwnika: %d\n",potwory[1]->nazwa, jakiprzeciwnik);
-                                Walka(&p,&potwory[1]);
-                            }
-                            else{
-                                printf("Wynik testu na przeciwnika: %d\n", jakiprzeciwnik);
-                                Walka(&p,&potwory[2]);
-                            }
-                            
-                            PrzejdzDalej();
-                        }
                         if(p->czyZyje){
                             printf("-------------- %s znajdujesz się w %s -------------\n", p->nazwa, (*al)->nazwa);
                             printf("%s\n", (*al)->opis);
@@ -87,7 +65,7 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                     tura++; zagrozenie++;
                                     break;            
                                 case '3':
-                                    Podnies();
+                                    Podnies(&p, &al);
                                     warunek = true;
                                     tura++; zagrozenie++;
                                     break;  
@@ -106,6 +84,7 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                     warunek = true;
                                     break;  
                                 case '7':
+
                                     warunek = true;
                                     koniec = true;
                                     break;                    
@@ -116,6 +95,31 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                 }
                             }
                         }
+                        ryzyko = k100();
+                        if(ryzyko < zagrozenie) wrog = true;
+                        else wrog = false;
+                        if( wrog && wybor != '6' && !koniec){
+  
+                            printf("%d WALKA; zagrozenie=%d \n", wrog, zagrozenie);
+                            jakiprzeciwnik = k100();
+                            
+                            if(jakiprzeciwnik < 51){
+                                printf("Wynik testu na przeciwnika: %d\n", jakiprzeciwnik);
+                                Walka(&p,&potwory[0], bron, tarcze, pancerz);
+                            }
+                            else if (jakiprzeciwnik >50 && jakiprzeciwnik < 95)
+                            {
+                                printf("%s Wynik testu na przeciwnika: %d\n",potwory[1]->nazwa, jakiprzeciwnik);
+                                Walka(&p,&potwory[1], bron, tarcze, pancerz);
+                            }
+                            else{
+                                printf("Wynik testu na przeciwnika: %d\n", jakiprzeciwnik);
+                                Walka(&p,&potwory[2], bron, tarcze, pancerz);
+                            }
+                            
+                            PrzejdzDalej();
+                        }
+
                     }
                 }
             }while(!warunek);
@@ -124,4 +128,5 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
         
         
     }while(!koniec);
+
 }
