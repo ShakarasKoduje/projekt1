@@ -24,19 +24,52 @@ void Przeszukaj(){
 
 }
 void Podnies(postac_t **p, lokalizacja_t ***l){
-    puts("PODNIEŚ TEST");
+    //puts("PODNIEŚ TEST");
 
     if((**l)->ileskarbow == 0){
-        puts("SKARBIEC PUSTY.");
+        puts("Nie ma tu niczego wartościowego do zabrania.");
     }
     else{
-        printf("ILE SKARBÓW? : [%d] %s", (**l)->ileskarbow, (**l)->przedmioty[0]->nazwa );
+        puts("Który z przedmiotów chcesz podnieść?");
+        puts("Wybierz z poniższych przedmiotów:");
 
-        //for(())
-        (**p).wezpzedmiot(&(**p).udzwig, &(*p)->plecak, &(**l)->przedmioty);
-        puts("PODNIEŚ");
+        for(int i = 0; i < (**l)->ileskarbow; i++){
+            printf("\t%d) Przedmiot: %s\n", i, (**l)->przedmioty[0]->nazwa );
+        }
+        puts("Lub wybierz inny znak by zrezygnować z akcji");
+        int wybor;
+        scanf("%d", &wybor);
+        getchar();
+        if(wybor < (**l)->ileskarbow){
+            printf("Wybór: %d < skarbów: %d\n", wybor, (**l)->ileskarbow);
+            (**p).wezpzedmiot(&(**p).udzwig, &(*p)->plecak, (**l)->przedmioty[wybor]);
+            //printf("Podniosłeś przedmiot %s\n", (**p).plecak[0]->nazwa);
+            int nowyrozmiar = (**l)->ileskarbow - 1;
+            przedmiot_t **tmpPrzedmioty = (przedmiot_t**)malloc(sizeof(przedmiot_t*)*nowyrozmiar);
+
+            for(int i =0, j = 0; i < (**l)->ileskarbow; i++){
+                if(i==wybor){
+                    puts("Ten przedmiot zostanie usunięty.");
+                    continue;
+                }
+                else{
+                    tmpPrzedmioty[j] = (**l)->przedmioty[i];
+                    j++;
+                }
+            }
+            free((**l)->przedmioty);
+            (**l)->przedmioty = tmpPrzedmioty;
+            --((**l)->ileskarbow);
+        }
+        else{
+            printf("Wybór: %d > skarbów: %d\n", wybor, (**l)->ileskarbow);
+        }
+        
+
+        //puts("PODNIEŚ");
     }
-    
+    PrzejdzDalejCzyscEkran();
+
 
 }
 void Uzyj(){
@@ -46,10 +79,18 @@ void Uzyj(){
 }
 
 void Ekwipunek(postac_t const ** p){
-    puts("EKWIPUNEK");
+    system("clear");
+    puts("EKWIPUNEK w plecaku: ");
+    for(int i = 0 ; i < (*p)->udzwig; i++){
+        //puts("JAKIŚ PRZEDMIOT");
+        printf("\t %s \n", (*p)->plecak[i]->nazwa);
+    }
+    PrzejdzDalejCzyscEkran();
+
 }
 
 void Postac(postac_t const ** p){
+    system("clear");
     puts("POSTAC");
     printf("%s\n", (*p)->nazwa);
     printf("Charakterystyka postaci: \n\twalka %d; \n\tzwinność %d; \n\tpercepcja %d; \n\tżywotność %d\n",

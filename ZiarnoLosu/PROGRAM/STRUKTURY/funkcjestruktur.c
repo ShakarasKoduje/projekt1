@@ -36,10 +36,15 @@ void PodniesPrzedmiot(int * u, przedmiot_t ***plecak, przedmiot_t ** przed){
 
 
     przedmiot_t ** tmp = (przedmiot_t**)malloc(sizeof(przedmiot_t*)*nowyudzwig);
+    for(int i = 0 ; i < *u; i++){
+        tmp[i] = (*plecak)[i];
+    }
     tmp[*u] =(przedmiot_t*)malloc(sizeof(przedmiot_t));
-    tmp[*u] = *przed;
+    tmp[*u] = przed;
+    printf("Podnosisz przedmiot %s\n", tmp[*u]->nazwa);
 
-
+    free(*plecak);
+    *plecak = tmp;
     ++(*u);
     printf("NOWY UDZWIG %d/%d" , nowyudzwig, *u);
 }
