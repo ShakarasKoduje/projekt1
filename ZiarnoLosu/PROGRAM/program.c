@@ -12,6 +12,7 @@ programu, tj. petlagry()
 
 #include "petlagry.h"
 #include "INICJALIZACJAPROGRAMU/intro.h"
+
 #include "INICJALIZACJAPROGRAMU/inicjalizacjagry.h"
 //#include "wskaznik.c"
 #include "STRUKTURY/struktura.h"
@@ -40,17 +41,16 @@ void program(){
     time_t czas;
     srand((unsigned) time(&czas)); //ziarno losu zostalo zasiane ;)
     UtworzPrzedmioty(&bron, &tarcze, &pancerze, &narzedzia, &jedzenie);
-
+   
 
     InicjalizacjaGry(&lokalizacje,&aktualnaLokalizacja, &potworyTemplatka);
     aktualnaLokalizacja = lokalizacje[0];
 
     PrzypiszPrzedmiotyDoLokalizacji(&lokalizacje, &bron, &tarcze, &pancerze, &narzedzia, &jedzenie);
     
-    
     WyswietlWprowadzenie();
     MenuGlowne();
-
+    
     UsunPostac(&bohater);
     UsunPrzedmioty(&bron, &tarcze, &pancerze, &narzedzia, &jedzenie);
     UsunLokacje(&lokalizacje);

@@ -8,7 +8,8 @@
 #include "STEROWANIEPROGRAMEM/sterowanie.h"
 #include "STEROWANIEPROGRAMEM/sterowaniepostacia.h"
 #include "STEROWANIEPROGRAMEM/kosci.h"
-
+//#include "INICJALIZACJAPROGRAMU/intro.h"
+#include "INICJALIZACJAPROGRAMU/zakonczenie.h"
 
 bool wrog, warunek, koniec;
 int ryzyko;
@@ -20,15 +21,27 @@ void ProwadzGre(postac_t *, lokalizacja_t **, lokalizacja_t const **, postac_t**
 
 void PetlaGry(postac_t **p,lokalizacja_t ***l, lokalizacja_t **startowalokalizacja, postac_t ***potwory, przedmiot_t ***bron, przedmiot_t ***tarcze, przedmiot_t *** pancerz){
 
-    tura = 1; zagrozenie = 5;
+    tura = 1; zagrozenie = 75;
     char ch;
 
-       
+     
     ProwadzGre(*p, startowalokalizacja, *l, *potwory, bron, tarcze, pancerz);
 
     if((*l)[11]->zamekotwarty1){
         puts("WIKTORIA!!!!!!!");
+
+
+        WyswietlZakonczenie();
+        printf("\n%s nadał sygnał w kierunku fortecy Helmgard! Być może jest jeszcze nadzieja.", (*p)->nazwa);
+        printf("\nW trakcie gry zdobyłeś %d punktów zwycięstwa.", (*p)->punktyzwyciestwa);
     }
+    else if ( (*p)->czyZyje == false  )
+    {   
+        void WyswietlZakonczenieSmierc();
+        printf("\n%s poległ w Wieży Sygnałowej. Nie zdołał nadać sygnału.", (*p)->nazwa);
+        printf("\nW trakciegry zdobyłeś %d punktów zwycięstwa.", (*p)->punktyzwyciestwa);
+    }
+    
     PrzejdzDalejCzyscEkran();
 }
 
@@ -53,7 +66,7 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                             printf("-------------- %s znajdujesz się w %s -------------\n", p->nazwa, (*al)->nazwa);
                             printf("%s\n", (*al)->opis);
                             PrzejdzDalej();
-                            puts("Co robisz?. Dokonaj wyboru:\n1) Przejdz do innego pomieszczenia \n2) Przeszukaj pomieszczenie \n3) Podnies przedmiot \n4) Uzyj przedmiotu\n5)Twój ekwipunek\n6)Twoja Postać\n7)Zakończ grę");
+                            puts("Co robisz?. Dokonaj wyboru:\n1) Przejdz do innego pomieszczenia  \n2) Podnies przedmiot \n3) Uzyj przedmiotu\n4)Twój ekwipunek\n5)Twoja Postać\n6)Zakończ grę");
                             printf("TURA: %d; zagrozenie=%d \n", tura, zagrozenie);
                             scanf("%c", &wybor);
                             getchar();
@@ -64,18 +77,13 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                     Ruch(&p,&al);
                                     warunek = true;
                                     tura++; zagrozenie++;
-                                    break;
+                                    break;          
                                 case '2':
-                                    Przeszukaj();
-                                    warunek = true;
-                                    tura++; zagrozenie++;
-                                    break;            
-                                case '3':
                                     Podnies(&p, &al);
                                     warunek = true;
                                     tura++; zagrozenie++;
                                     break;  
-                                case '4':
+                                case '3':
                                     Uzyj(&p,&al, &l);
                                     warunek = true;
                                     tura++; zagrozenie++;
@@ -85,16 +93,16 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                         goto ZWYCIESTWO;
                                     }
                                     break;  
-                                case '5':
+                                case '4':
                                     Ekwipunek(&p);
                                     warunek = true;
                                     break;  
-                                case '6':
+                                case '5':
                                     system("clear");
                                     Postac(&p);
                                     warunek = false; //true
                                     break;  
-                                case '7':
+                                case '6':
                                     goto KONIEC;
                                     puts("WYBRANO 7");
                                     warunek = true;
@@ -110,7 +118,7 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                         ryzyko = k100();
                         if(ryzyko < zagrozenie) wrog = true;
                         else wrog = false;
-                        if( wrog && wybor != '6' && !koniec){
+                        if( wrog && wybor != '5' && !koniec){
   
                             printf("%d WALKA; zagrozenie=%d \n", wrog, zagrozenie);
                             jakiprzeciwnik = k100();

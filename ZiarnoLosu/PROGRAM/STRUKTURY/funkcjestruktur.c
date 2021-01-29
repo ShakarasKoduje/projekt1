@@ -65,7 +65,7 @@ void UzyjPrzedmiotNaSobie(postac_t ***p){
             
     if(isdigit(wybor) && index < (**p)->udzwig){
         if((**p)->plecak[index]->rodzaj == 4){
-            puts("JEDZENIE PRZYWRÓCI CI ŻYWOTNOŚĆ");
+            puts("JEDZENIE i MEDYKAMENTY PRZYWRÓCI CI ŻYWOTNOŚĆ");
             (**p)->zywotnosc += (**p)->plecak[index]->cecha;
             (**p)->zywotnosc += rand()%6+1;
             if((**p)->zywotnosc > 30) (**p)->zywotnosc = 30;
