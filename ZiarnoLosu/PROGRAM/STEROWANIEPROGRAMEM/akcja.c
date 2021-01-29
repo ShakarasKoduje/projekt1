@@ -119,8 +119,12 @@ void Ekwipunek(postac_t const ** p){
 
 void Postac(postac_t const ** p){
     system("clear");
-    puts("POSTAC");
+
     printf("%s\n", (*p)->nazwa);
+    puts("Jesteś Strażnikiem Dróg, i twoją rolą jest zapewnienie bezpieczeństwa na traktach Wielkiej Prowincji Reiklandu");
+    puts("Wraz ze swoim oddziałem wpadłeś na stado zwierzoludzi.");
+    puts("Stado okazało się tylko forpocztą ogromnej hordy, która nadciąga z głębi Reikwaldu, pustosząc wszystko na swej drodze.");
+    puts("");
     printf("Charakterystyka postaci: \n\twalka %d; \n\tzwinność %d; \n\tpercepcja %d; \n\tżywotność %d\n",
     (*p)->walka, (*p)->zwinnosc, (*p)->percepcja,  (*p)->zywotnosc);
     PrzejdzDalejCzyscEkran();

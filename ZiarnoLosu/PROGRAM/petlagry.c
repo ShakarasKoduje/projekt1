@@ -37,7 +37,7 @@ void PetlaGry(postac_t **p,lokalizacja_t ***l, lokalizacja_t **startowalokalizac
     }
     else if ( (*p)->czyZyje == false  )
     {   
-        void WyswietlZakonczenieSmierc();
+        WyswietlZakonczenieSmierc();
         printf("\n%s poległ w Wieży Sygnałowej. Nie zdołał nadać sygnału.", (*p)->nazwa);
         printf("\nW trakciegry zdobyłeś %d punktów zwycięstwa.", (*p)->punktyzwyciestwa);
     }
