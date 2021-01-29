@@ -10,7 +10,7 @@ void Ruch(postac_t **p, lokalizacja_t ***al){
     int wybor;
     scanf("%d", &wybor);
     getchar();
-    printf("ILUS SASIADOW %d\n", (**al)->ilusasiadow);
+    
     if(wybor < (**al)->ilusasiadow) {
             lokalizacja_t **tmp = (lokalizacja_t **)malloc(sizeof(lokalizacja_t*));
             *tmp = (**al)->sasiedzi[wybor];
@@ -23,9 +23,8 @@ void Przeszukaj(){
     puts("PRZESZUKAJ");
 
 }
-void Podnies(postac_t **p, lokalizacja_t ***l){
-    //puts("PODNIEŚ TEST");
 
+void Podnies(postac_t **p, lokalizacja_t ***l){
     if((**l)->ileskarbow == 0){
         puts("Nie ma tu niczego wartościowego do zabrania.");
     }
@@ -34,7 +33,7 @@ void Podnies(postac_t **p, lokalizacja_t ***l){
         puts("Wybierz z poniższych przedmiotów:");
 
         for(int i = 0; i < (**l)->ileskarbow; i++){
-            printf("\t%d) Przedmiot: %s\n", i, (**l)->przedmioty[0]->nazwa );
+            printf("\t%d) Przedmiot: %s\n", i, (**l)->przedmioty[i]->nazwa );
         }
         puts("Lub wybierz inny znak by zrezygnować z akcji");
         int wybor;
@@ -43,7 +42,7 @@ void Podnies(postac_t **p, lokalizacja_t ***l){
         if(wybor < (**l)->ileskarbow){
             printf("Wybór: %d < skarbów: %d\n", wybor, (**l)->ileskarbow);
             (**p).wezpzedmiot(&(**p).udzwig, &(*p)->plecak, (**l)->przedmioty[wybor]);
-            //printf("Podniosłeś przedmiot %s\n", (**p).plecak[0]->nazwa);
+
             int nowyrozmiar = (**l)->ileskarbow - 1;
             przedmiot_t **tmpPrzedmioty = (przedmiot_t**)malloc(sizeof(przedmiot_t*)*nowyrozmiar);
 
@@ -64,36 +63,54 @@ void Podnies(postac_t **p, lokalizacja_t ***l){
         else{
             printf("Wybór: %d > skarbów: %d\n", wybor, (**l)->ileskarbow);
         }
-        
 
-        //puts("PODNIEŚ");
     }
     PrzejdzDalejCzyscEkran();
 
 
 }
-void Uzyj(postac_t **p, lokalizacja_t ***l){
+void Uzyj(postac_t **p, lokalizacja_t ***l, lokalizacja_t const *** warunek){
 
-    if(strcmp((**l)->nazwa, "Mechanizm Sygnałowy") == 0){
+    puts("\tChcesz użyć przedmiotu na siebie, czy w lokalizacji?");
+    puts("\t1) Na sobie\t2) W lokalizacji\t Inna cyfra to zmiana decyzji");
+    
+    char wybor;
+     PONOWWYBOR:
+     ;
+    scanf("%c", &wybor);
+    getchar();
+    if(isdigit(wybor)){
+        switch(wybor){
+            case '1':
+                puts("Użyj przedmiotu z ekwipunku");
+                (*p)->uzyjprzedmiotnasobie(&p);    
+                break;
+            case '2':
+                puts("Użyj przedmiotu w lokalizacji.");
+                (*p)->uzyjprzedmiotlokalizacja(&p, &l, &warunek);
 
-        puts("Jesteś w Mechanizmie sygnałowym");
-
+                puts("UŻYJ");
+                break;
+            default:
+                break;
+        }
     }
-    if(strcmp((**l)->nazwa, "Biuro") == 0){
-
-        puts("Jesteś w Biurze");
-
+    else{
+        puts("Nie wprowadziłeś cyfry, spróbuj raz jeszcze.");
+        goto PONOWWYBOR;
     }
-    puts("UŻYJ");
-
+    PrzejdzDalejCzyscEkran();
 
 }
+
+ 
+
 
 void Ekwipunek(postac_t const ** p){
     system("clear");
     puts("EKWIPUNEK w plecaku: ");
     for(int i = 0 ; i < (*p)->udzwig; i++){
-        //puts("JAKIŚ PRZEDMIOT");
+
         printf("\t %s KLUCZ: %d\n", (*p)->plecak[i]->nazwa, (*p)->plecak[i]->cecha);
     }
     PrzejdzDalejCzyscEkran();

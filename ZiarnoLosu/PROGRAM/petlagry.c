@@ -9,6 +9,7 @@
 #include "STEROWANIEPROGRAMEM/sterowaniepostacia.h"
 #include "STEROWANIEPROGRAMEM/kosci.h"
 
+
 bool wrog, warunek, koniec;
 int ryzyko;
 int tura;
@@ -24,6 +25,10 @@ void PetlaGry(postac_t **p,lokalizacja_t ***l, lokalizacja_t **startowalokalizac
 
        
     ProwadzGre(*p, startowalokalizacja, *l, *potwory, bron, tarcze, pancerz);
+
+    if((*l)[11]->zamekotwarty1){
+        puts("WIKTORIA!!!!!!!");
+    }
     PrzejdzDalejCzyscEkran();
 }
 
@@ -38,6 +43,7 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
             do{
                 printf("CZY TA POSTAC ZYJE? %d\n", p->czyZyje);
                 if(!p->czyZyje){
+                    goto KONIEC;
                     warunek = true;
                     koniec = true;
                 }
@@ -70,9 +76,14 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                     tura++; zagrozenie++;
                                     break;  
                                 case '4':
-                                    Uzyj(&p,&al);
+                                    Uzyj(&p,&al, &l);
                                     warunek = true;
                                     tura++; zagrozenie++;
+                                    printf("CIEKAWA SPRAWA CO TU SIE DZIEJE:");
+                                    if( l[11]->zamekotwarty1 == true){
+                                        puts("ZWYCIESTWO");
+                                        goto ZWYCIESTWO;
+                                    }
                                     break;  
                                 case '5':
                                     Ekwipunek(&p);
@@ -81,10 +92,11 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
                                 case '6':
                                     system("clear");
                                     Postac(&p);
-                                    warunek = true;
+                                    warunek = false; //true
                                     break;  
                                 case '7':
-
+                                    goto KONIEC;
+                                    puts("WYBRANO 7");
                                     warunek = true;
                                     koniec = true;
                                     break;                    
@@ -128,5 +140,10 @@ void ProwadzGre(postac_t *p, lokalizacja_t **al, lokalizacja_t const **l, postac
         
         
     }while(!koniec);
+    ZWYCIESTWO:
+        puts("ZWYCIĘSTWO!!");
+    KONIEC:
+        puts("KONIEC");
+
 
 }

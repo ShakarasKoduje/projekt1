@@ -54,10 +54,22 @@ void UtworzLokalizacje(lokalizacja_t * const * lokalizacje){
     for(int i = 0 ; i < KOMNATY; i++){
         lokalizacje[i]->nazwa = (char*)malloc(sizeof(char)*64);
         lokalizacje[i]->plik = (char*)malloc(sizeof(char)*64);
-        lokalizacje[i]->przedmioty =(przedmiot_t**)malloc(sizeof(przedmiot_t*));
         lokalizacje[i]->ileskarbow = 0;
-        lokalizacje[i]->zamek = 0;
-        if(i == 10)lokalizacje[i]->zamek = 113; //Trybiki
+        lokalizacje[i]->przedmioty =(przedmiot_t**)malloc(sizeof(przedmiot_t*)*lokalizacje[i]->ileskarbow);
+
+        //lokalizacje[i]->przedmioty =(przedmiot_t**)malloc(sizeof(przedmiot_t*));
+        //lokalizacje[i]->ileskarbow = 0;
+        lokalizacje[i]->zamek1 = 0;
+        lokalizacje[i]->zamek2 = 0;
+        lokalizacje[i]->zamekotwarty1 = false;
+        lokalizacje[i]->zamekotwarty2 = false;
+        if(i == 10){
+            lokalizacje[i]->zamek1 = 113; //Trybiki
+            lokalizacje[i]->zamek2 = 103; //Trybiki
+        }
+        else if(i == 11){
+            lokalizacje[i]->zamek1 = 111;
+        }
     }
     int ilu=0;
     /*
@@ -372,6 +384,58 @@ void WypelnijPrzedmioty(przedmiot_t * const * przedmioty, int rodzaj, int iterac
 
 void PrzypiszPrzedmiotyDoLokalizacji(lokalizacja_t *** lok, przedmiot_t *** b, przedmiot_t *** t, przedmiot_t ***p, przedmiot_t *** n, przedmiot_t *** j){
     puts("OLOLOLOLOLOLOLOLOLO");
-    (*lok)[0]->ileskarbow = 1; (*lok)[0]->przedmioty[0] = (*n)[1];
+    int sztukbroni = 5, sztuktarcz = 3, sztukpancerza = 4, sztuknarzedzi = 3, sztukjedzenia = 3;
+    int los;
+
+/*
+    JEDZENIE
+*/
+
+    for(int i = 0; i < sztukjedzenia; i++){
+        los = rand()%11+1;
+        printf("\nLOS: %d\t", los);
+        
+        int nowywymiar  = (*lok)[los]->ileskarbow +1;
+        przedmiot_t **tmp_przedmioty = (przedmiot_t**)malloc(sizeof(przedmiot_t*)*nowywymiar);
+        for(int x = 0; x <  (*lok)[los]->ileskarbow; x++ ){
+            tmp_przedmioty[x] = (*lok)[los]->przedmioty[x];
+        }
+        tmp_przedmioty[(*lok)[los]->ileskarbow] = (*j)[i];
+
+        puts("TEST! ZWOLNIENIE PAMIECI W PRZEDMIOTACH LOKALIZACJI");
+        free((*lok)[los]->przedmioty);
+        (*lok)[los]->przedmioty = tmp_przedmioty;
+    
+        (*lok)[los]->ileskarbow += 1;
+        printf("\tINDEX 2 : %d\n", ((*lok)[los]->ileskarbow));
+
+        printf("\nW pomieszczeniu %s znajduje się: %s\n", (*lok)[los]->nazwa, (*lok)[los]->przedmioty[(*lok)[los]->ileskarbow -1]->nazwa); //(*lok)[los]->przedmioty[(*lok)[los]->ileskarbow]->nazwa 
+
+    }
+
+/*
+    NARZĘDZIA
+*/
+    for(int i = 0; i < sztuknarzedzi; i++){
+        los = rand()%11+1;
+        printf("\nLOS: %d\t", los);
+        
+        int nowywymiar  = (*lok)[los]->ileskarbow +1;
+        przedmiot_t **tmp_przedmioty = (przedmiot_t**)malloc(sizeof(przedmiot_t*)*nowywymiar);
+        for(int x = 0; x <  (*lok)[los]->ileskarbow; x++ ){
+            tmp_przedmioty[x] = (*lok)[los]->przedmioty[x];
+        }
+        tmp_przedmioty[(*lok)[los]->ileskarbow] = (*n)[i];
+
+        puts("TEST! ZWOLNIENIE PAMIECI W PRZEDMIOTACH LOKALIZACJI");
+        free((*lok)[los]->przedmioty);
+        (*lok)[los]->przedmioty = tmp_przedmioty;
+    
+        (*lok)[los]->ileskarbow += 1;
+        printf("\tINDEX 2 : %d\n", ((*lok)[los]->ileskarbow));
+
+        printf("\nW pomieszczeniu %s znajduje się: %s\n", (*lok)[los]->nazwa, (*lok)[los]->przedmioty[(*lok)[los]->ileskarbow -1]->nazwa); //(*lok)[los]->przedmioty[(*lok)[los]->ileskarbow]->nazwa 
+
+    }
 }
 

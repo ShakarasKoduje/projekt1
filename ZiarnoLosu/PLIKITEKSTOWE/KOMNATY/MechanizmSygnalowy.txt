@@ -1,6 +1,11 @@
     =========================================================================
     Mechanizm Sygnałowy mieści się na samej górze wieży. Jest sercem tej budowli,
     dzięki niemu można nadawać sygnały do sąsiednich wieży.
+
     Teraz ustrojstwo, pełne trybów i wajch stoi cicho. Ale czy jest sprawne?
+    Jeżeli mecanizm jest sprawny, to z PLATFORMY OBSERWACYJNEJ można nadać sygnał.
+    Garnizon z Helmgardu w porę ostrzeżony, może jeszcze ruszyć z odsieczą
+    i ochronić Wheburg przed nadciągającą zagładą.
+
     Można stąd przejść na PLATFORMĘ OBSERWACYJNĄ lub zejść na dół do BIURA.
     ==========================================================================

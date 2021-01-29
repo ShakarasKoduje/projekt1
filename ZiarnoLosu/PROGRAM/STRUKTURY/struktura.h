@@ -15,7 +15,7 @@ struct postac_t{
 
     void (* atakuj)(postac_t***, postac_t***);
     void (* wezpzedmiot)(int *, przedmiot_t***, przedmiot_t**);
-    void (* uzyjprzedmiotlokalizacja)(postac_t***, przedmiot_t*);
+    void (* uzyjprzedmiotlokalizacja)(postac_t***, lokalizacja_t****, lokalizacja_t****);
     void (* uzyjprzedmiotnasobie) (postac_t ***);
     void (* okrzyk)(postac_t const ***);
     unsigned int walka, zwinnosc, percepcja, punktyzwyciestwa, udzwig;   
@@ -36,8 +36,12 @@ struct lokalizacja_t{
     char *nazwa, *plik;
     char *opis;
     unsigned int ilekomnat;
-    unsigned int zamek;
+    int zamek1, zamek2;
+    bool zamekotwarty1, zamekotwarty2;
+    
     unsigned int ilusasiadow;
+
+
 
     const lokalizacja_t **sasiedzi; //tablica z sasiednimi lokalizacjami
     przedmiot_t **przedmioty;

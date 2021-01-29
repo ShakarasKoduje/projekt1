@@ -50,6 +50,11 @@ void program(){
     
     WyswietlWprowadzenie();
     MenuGlowne();
+
+    UsunPostac(&bohater);
+    UsunPrzedmioty(&bron, &tarcze, &pancerze, &narzedzia, &jedzenie);
+    UsunLokacje(&lokalizacje);
+    UsunPotwory(&potworyTemplatka);
     puts("Koniec Programu.");
     PrzejdzDalej();
 

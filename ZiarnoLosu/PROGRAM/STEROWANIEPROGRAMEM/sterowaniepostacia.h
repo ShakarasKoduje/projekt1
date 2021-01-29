@@ -5,6 +5,6 @@ void Walka(postac_t **, postac_t **, przedmiot_t ***, przedmiot_t ***, przedmiot
 void Ruch(postac_t **, lokalizacja_t ***);
 void Przeszukaj();
 void Podnies(postac_t **, lokalizacja_t ***);
-void Uzyj(postac_t **, lokalizacja_t ***);
+void Uzyj(postac_t **, lokalizacja_t ***, lokalizacja_t const ***);
 void Ekwipunek(postac_t const **);
 void Postac(postac_t const **);
